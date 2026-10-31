@@ -1,7 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeading from '../components/PageHeading.astro';
+import { site } from '../data/site';
 ---
 <BaseLayout title="About">
-  <h1>About</h1>
-  <p>Under Construction</p>
+  <PageHeading title="About" />
+  <div class="prose prose-slate max-w-none">
+    <p>{site.bio}</p>
+    <h2>What this site is</h2>
+    <p>A home for my professional background, plus a running log of what I'm reading, building and writing.</p>
+    <h2>Interests</h2>
+    <ul>
+      <li>TODO: interest</li>
+      <li>TODO: interest</li>
+    </ul>
+  </div>
 </BaseLayout>

@@ -1,0 +1,7 @@
+---
+const { title, intro } = Astro.props;
+---
+<div class="mb-8">
+  <h1 class="text-3xl font-bold tracking-tight">{title}</h1>
+  {intro && <p class="mt-2 text-slate-600">{intro}</p>}
+</div>

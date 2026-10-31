@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeading from '../../components/PageHeading.astro';
+
+const posts = (await getCollection('writing', (w) => !w.data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="Writing">
+  <PageHeading title="Writing" intro="Notes on what I'm learning." />
+  <ul class="space-y-5">
+    {posts.map((w) => (
+      <li>
+        <a href={`/writing/${w.id}`} class="text-lg font-semibold">{w.data.title}</a>
+        <p class="text-sm text-slate-500">{w.data.date.toLocaleDateString('en-US', { dateStyle: 'medium' })}</p>
+        <p class="mt-1 text-slate-600">{w.data.description}</p>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

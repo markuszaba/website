@@ -1,7 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeading from '../components/PageHeading.astro';
+import { site } from '../data/site';
 ---
 <BaseLayout title="Contact">
-  <h1>Contact</h1>
-  <p>Under Construction</p>
+  <PageHeading title="Contact" intro="The best way to reach me is email." />
+  <p><a href={`mailto:${site.email}`} class="text-lg">{site.email}</a></p>
+  <ul class="mt-6 space-y-2">
+    {site.links.map((l) => <li><a href={l.href}>{l.label} ↗</a></li>)}
+  </ul>
 </BaseLayout>

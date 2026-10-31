@@ -1,0 +1,22 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Badge from '../../components/Badge.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<BaseLayout title={entry.data.title} description={entry.data.summary}>
+  <a href="/projects" class="text-sm">← Projects</a>
+  <h1 class="mt-3 text-3xl font-bold tracking-tight">{entry.data.title}</h1>
+  <p class="mt-2"><Badge label={entry.data.status} /></p>
+  <p class="mt-3 flex gap-4 text-sm">
+    {entry.data.url && <a href={entry.data.url}>Live ↗</a>}
+    {entry.data.repo && <a href={entry.data.repo}>Source ↗</a>}
+  </p>
+  <div class="prose prose-slate mt-6 max-w-none"><Content /></div>
+</BaseLayout>

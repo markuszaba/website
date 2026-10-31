@@ -1,7 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeading from '../components/PageHeading.astro';
+import { site, experience, education } from '../data/site';
 ---
 <BaseLayout title="Experience">
-  <h1>Experience</h1>
-  <p>Under Construction</p>
+  <PageHeading title="Experience" intro="Where I've worked and studied." />
+  <ol class="space-y-8">
+    {experience.map((job) => (
+      <li>
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+          <h2 class="text-lg font-semibold">{job.role} <span class="font-normal text-slate-500">· {job.company}</span></h2>
+          <span class="text-sm text-slate-500">{job.period}</span>
+        </div>
+        <ul class="mt-2 list-disc space-y-1 pl-5 text-slate-700">
+          {job.points.map((p) => <li>{p}</li>)}
+        </ul>
+      </li>
+    ))}
+  </ol>
+  <h2 class="mb-3 mt-12 text-lg font-semibold">Education</h2>
+  <ul class="space-y-1">
+    {education.map((e) => <li>{e.school} <span class="text-slate-500">· {e.detail}</span></li>)}
+  </ul>
+  <p class="mt-10"><a href={site.resumeUrl}>Download full resume (PDF) ↓</a></p>
 </BaseLayout>
